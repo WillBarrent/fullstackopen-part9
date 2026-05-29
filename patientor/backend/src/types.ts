@@ -1,4 +1,6 @@
-// import { z } from "zod";
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+import { z } from "zod";
+import { NewPatientSchema } from "./utils.ts";
 
 export const GenderValues = {
   Male: "male",
@@ -14,13 +16,8 @@ export interface Diagnosis {
   latin?: string;
 }
 
-export interface Patient {
-  id: string;
-  name: string;
-  dateOfBirth: string;
-  ssn: string;
-  gender: Gender;
-  occupation: string;
-}
+export type NewPatientEntry = z.infer<typeof NewPatientSchema>;
 
-export type NewPatientEntry = Omit<Patient, "id">;
+export interface Patient extends NewPatientEntry {
+  id: string,
+}
